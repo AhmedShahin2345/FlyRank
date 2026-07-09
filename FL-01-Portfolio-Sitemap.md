@@ -57,3 +57,15 @@
 - [x] ChatGPT Account Created
 - [x] Gemini Account Created
 - [x] Perplexity Account Created
+
+---
+
+## Appendix: Assignment Proofs
+
+### My Sitemap Sketch
+![Sitemap Sketch](sitemap_sketch.png)
+
+### Claude Project Configuration & Pressure Test
+![Claude Setup 1](claude_1.png)
+![Claude Setup 2](claude_2.png)
+![Claude Setup 3](claude_3.png)
