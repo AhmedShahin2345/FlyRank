@@ -4,40 +4,40 @@
 
 | Task | Category | Rationale |
 | :--- | :--- | :--- |
-| **1. Drafting weekly competitive analysis summaries for leadership** | Delegate to AI with review | AI can synthesize raw metrics into a draft, but I must review for strategic nuance. |
-| **2. Leading strategic alignment meetings with the marketing team** | Just me | Requires human empathy, real-time negotiation, and leadership presence. |
-| **3. Brainstorming unconventional youth marketing campaigns** | Collaborate with AI | AI provides rapid ideation and lateral thinking, which we refine together. |
-| **4. Extracting insights from quarterly telecom financial reports (Vodafone, e&, WE)** | Delegate to AI with review | AI pulls the numbers quickly, but I must verify against the source and add context. |
-| **5. Presenting final market intelligence findings to the C-suite** | Just me | High-stakes communication requires reading the room and answering unpredictable questions. |
-| **6. Scraping competitor social media campaign metrics** | Fully automate | Scripts and web scrapers can collect this data daily without any manual intervention. |
-| **7. Structuring SWOT analysis frameworks for new product launches** | Collaborate with AI | AI builds the structural skeleton, while I fill in the proprietary strategic insights. |
-| **8. Writing basic Python/Node scripts to automate personal file organization** | Collaborate with AI | AI writes the boilerplate code, I test and tweak it for my specific macOS environment. |
-| **9. Managing stakeholder relationships and resolving inter-departmental conflicts** | Just me | Strictly relies on emotional intelligence, trust building, and internal company politics. |
-| **10. Formatting tabular data and cleaning up CSV files for analysis** | Fully automate | AI tools and scripts can perfectly clean and structure standard data formats automatically. |
-| **11. Reviewing the final budget allocation for H2 marketing strategies** | Just me | Requires accountability and a deep understanding of historical financial constraints. |
-| **12. Designing PowerPoint templates and formatting market share slides** | Delegate to AI with review | AI can write VBA/XML for templates, but I adjust the final visual aesthetics to match brand guidelines. |
+| **1. Drafting weekly SU event promotion emails to the AUC student body** | Delegate to AI with review | AI can write the initial drafts quickly, but I need to inject the SU's authentic student voice. |
+| **2. Leading weekly marketing committee meetings with student volunteers** | Just me | Requires empathy, motivation, and hands-on leadership to keep the team engaged. |
+| **3. Brainstorming creative themes for the annual SU Welcome Party** | Collaborate with AI | AI helps generate wild, out-of-the-box ideas which my team and I then filter and ground in reality. |
+| **4. Analyzing social media engagement metrics (Instagram/TikTok) for recent campaigns** | Delegate to AI with review | AI can summarize the raw stats, but I need to draw the actionable insights for our campus strategy. |
+| **5. Pitching sponsorship packages to local brands and cafes around New Cairo** | Just me | High-stakes interpersonal negotiation where reading the room is critical to securing funding. |
+| **6. Organizing the shared Google Drive for all marketing assets and photos** | Fully automate | Scripts and tools can automatically sort files by event date and type without manual dragging. |
+| **7. Creating the structural outline for the SU's semester marketing strategy document** | Collaborate with AI | AI builds the skeleton, while I fill in the AUC-specific calendar dates and student goals. |
+| **8. Formatting budget expense sheets for the SU treasurer** | Fully automate | AI tools and macros can instantly clean and structure the financial data perfectly. |
+| **9. Managing conflicts between committee members over creative direction** | Just me | Strictly relies on emotional intelligence, peer mediation, and trust building. |
+| **10. Writing basic scripts to bulk-resize event photos for Instagram uploads** | Collaborate with AI | AI writes the boilerplate code, I test it on our actual media files before deploying. |
+| **11. Reviewing final poster designs before sending them to the campus print shop** | Just me | Requires a human eye to ensure our SU branding guidelines are perfectly followed. |
+| **12. Generating variations of Instagram captions for ticket sales countdowns** | Delegate to AI with review | AI provides 10 options instantly; I pick the best one and add relevant campus hashtags. |
 
 ---
 
 ## 2. Target Tasks for Automation (FL-02 through FL-04)
 
-### Target Task 1: Drafting weekly competitive analysis summaries
-- **Success Definition**: The AI consistently extracts the key KPIs (ARPU, market share, churn rate) from raw data and generates a 1-page executive summary that requires less than 15 minutes of my manual editing before sending to leadership.
+### Target Task 1: Drafting weekly SU event promotion emails
+- **Success Definition**: The AI consistently writes a clear, exciting 3-paragraph email draft highlighting event logistics that requires less than 5 minutes of my manual editing before broadcasting to the student body.
 
-### Target Task 2: Brainstorming unconventional marketing campaigns
-- **Success Definition**: The AI generates at least 5 distinct, out-of-the-box campaign concepts per session that meet our budget constraints and target the youth demographic, with at least one concept being viable enough to pitch in the weekly strategy meeting.
+### Target Task 2: Brainstorming creative themes for the annual SU Welcome Party
+- **Success Definition**: The AI generates at least 5 distinct, budget-friendly themes per session tailored to university students, with at least one concept being viable enough to pitch to the SU President.
 
-### Target Task 3: Extracting insights from quarterly telecom financial reports
-- **Success Definition**: The AI accurately parses a 50+ page competitor PDF report and generates a comparison table against our internal metrics with zero hallucinations, saving me 3+ hours of manual document reading per quarter.
+### Target Task 3: Analyzing social media engagement metrics
+- **Success Definition**: The AI accurately synthesizes weekly Instagram/TikTok insights into a quick top-performing content list with zero hallucinations, saving me 2+ hours of manual data entry and math per week.
 
 ---
 
 ## 3. Claude Project Configuration
 
 **Custom Instructions Used:**
-> **Who I am**: I am Ahmed Shahin, a Senior Market Intelligence Director at Orange Egypt, juggling high-level strategic telecom analysis with hands-on technical learning (like Python and automation).
-> **Tone Preferences**: Professional, concise, and direct. Skip the fluff and robotic disclaimers. Speak like a senior strategic consultant—insightful, data-driven, and pragmatic.
-> **Current Goals**: I am focused on mastering AI workflows to automate data extraction, brainstorm aggressive marketing strategies against Vodafone/e&/WE, and free up my time for high-stakes leadership tasks.
+> **Who I am**: I am Ahmed Shahin, the Marketing Head for the Student Union at the American University in Cairo (AUC). I balance managing a team of student volunteers with executing massive campus-wide campaigns and events.
+> **Tone Preferences**: Energetic, relatable, and professional but not stiff. Speak like a dynamic student leader—creative, organized, and deeply tuned in to university campus culture.
+> **Current Goals**: I am focused on mastering AI workflows to automate tedious tasks like data formatting and caption writing, so I can spend more time on high-level strategy, team motivation, and securing sponsorships.
 
 **Screenshot of Configured Claude Project:**
 
