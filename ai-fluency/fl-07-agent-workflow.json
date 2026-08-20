@@ -1,5 +1,5 @@
 {
-  "name": "Brief Scout Agent (FL-07)",
+  "name": "Brief Scout Agent (FL-07 + W6 Scheduler & Slack)",
   "nodes": [
     {
       "id": "wh-1",
@@ -14,7 +14,32 @@
       "parameters": {
         "path": "brief-agent",
         "httpMethod": "POST",
-        "responseMode": "lastNode"
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "cron-1",
+      "name": "Schedule Trigger (Every Tue 09:00)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -180
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1,
+              "triggerAtDay": [
+                2
+              ],
+              "triggerAtHour": 9,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
       }
     },
     {
@@ -23,7 +48,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        220,
+        240,
         0
       ],
       "parameters": {
@@ -32,19 +57,19 @@
             {
               "id": "1",
               "name": "url",
-              "value": "={{ $json.body.url }}",
+              "value": "={{ $json.body?.url || $json.url || 'https://www.retaildive.com/feeds/news/' }}",
               "type": "string"
             },
             {
               "id": "2",
               "name": "topic",
-              "value": "={{ $json.body.topic }}",
+              "value": "={{ $json.body?.topic || $json.topic || 'retail' }}",
               "type": "string"
             },
             {
               "id": "3",
               "name": "max_items",
-              "value": "={{ $json.body.max_items }}",
+              "value": "={{ $json.body?.max_items || $json.max_items || 3 }}",
               "type": "number"
             }
           ]
@@ -57,7 +82,7 @@
       "type": "n8n-nodes-base.rssFeedRead",
       "typeVersion": 1.2,
       "position": [
-        440,
+        460,
         0
       ],
       "parameters": {
@@ -70,7 +95,7 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        560,
+        620,
         0
       ],
       "parameters": {
@@ -83,8 +108,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        660,
-        120
+        780,
+        160
       ],
       "parameters": {
         "model": "gemma3:1b",
@@ -103,14 +128,14 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.5,
       "position": [
-        660,
+        780,
         0
       ],
       "parameters": {
         "promptType": "define",
-        "text": "Topic: {{ $json.topic }}\nFeed URL: {{ $json.url || 'default' }}\n\nItems (title, link, snippet):\n{{ $json.items }}\n\nProduce the brief exactly as specified in the system prompt.",
+        "text": "You write a weekly industry brief on the topic \"{{ $('Input').first().json.topic }}\". The article below is one item from the feed. Respond with exactly three lines:\nINSIGHT: one sentence, what the reader should remember\nTAG: one of [gen-z, retail, social, data, campaigns, platform]\nRELEVANCE: one sentence, why a youth-marketing operator should care\n\nArticle:\nTitle: {{ $json.title }}\nLink: {{ $json.link }}\nDescription: {{ $json.contentSnippet }}",
         "options": {
-          "systemMessage": "You are Brief Scout, a precise industry-briefing agent.\n\nYour job: given a topic and a list of RSS items (title, link, date, snippet),\nproduce a brief with exactly this structure:\n\n# Weekly Brief \u2014 <topic> \u2014 <YYYY-MM-DD>\n**Items scanned:** N\n**Sources:** <feed URL>\n\n## Briefs\n1. <one-sentence summary with source title in brackets>\n2. ...\n3. ...\n\nRules \u2014 never break these:\n1. One sentence per item. No bullet lists inside a sentence.\n2. Every claim cites the source title in square brackets at the end of the\n   sentence, e.g. \"Retailers are shifting ad spend to TikTok [Adweek: 'TikTok\n   Takes Over'].\"\n3. No invented links, no invented numbers. If the snippet lacks a figure,\n   do not add one. Write \"the article notes a shift\" not \"a 23 % shift.\"\n4. If zero items are relevant, say \"No relevant items found in this feed.\"\n5. Output ONLY the brief \u2014 no preamble, no \"Here is your brief,\" no\n   markdown code fences. Plain text."
+          "systemMessage": "You write crisp industry briefs for a youth-marketing operator. Never invent facts, never ask for input, never add preamble. Output only the three labelled lines. Keep every line under 25 words."
         }
       }
     },
@@ -120,16 +145,66 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        900,
+        1020,
         0
       ],
       "parameters": {
-        "jsCode": "const items = $('Limit').all();\nconst briefs = $('Synthesize \u00b7 LLM Chain').all();\nconst topic = $('Input').first().json.topic ?? '';\nconst out = [];\nconst n = Math.min(items.length, briefs.length);\nfor (let i = 0; i < n; i++) {\n  out.push({\n    title: items[i].json.title ?? 'untitled',\n    link: items[i].json.link ?? '',\n    ai: briefs[i].json.text ?? ''\n  });\n}\nreturn [{ json: { topic, generated_at: new Date().toISOString(), count: out.length, briefs: out } }];"
+        "jsCode": "const items = $('Limit').all();\nconst briefs = $('Synthesize \u00b7 LLM Chain').all();\nconst topic = $('Input').first().json.topic ?? 'retail';\nconst out = [];\nconst n = Math.min(items.length, briefs.length);\nlet markdown = '# Weekly Brief \u2014 ' + topic + ' \u2014 ' + new Date().toISOString().slice(0, 10) + '\\n\\n';\n\nfor (let i = 0; i < n; i++) {\n  const title = items[i].json.title ?? 'untitled';\n  const link = items[i].json.link ?? '';\n  const ai = briefs[i].json.text ?? '';\n  out.push({ title, link, ai });\n  markdown += '### ' + (i+1) + '. ' + title + '\\n' + '**Link:** ' + link + '\\n\\n' + ai + '\\n\\n---\\n\\n';\n}\n\nreturn [{ json: { topic, generated_at: new Date().toISOString(), count: out.length, briefs: out, text: markdown } }];"
+      }
+    },
+    {
+      "id": "slack-1",
+      "name": "Post to Slack Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        -100
+      ],
+      "continueOnFail": true,
+      "parameters": {
+        "method": "POST",
+        "url": "https://httpbin.org/anything/slack-brief",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "respond-1",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1240,
+        100
+      ],
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
       }
     }
   ],
   "connections": {
     "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger (Every Tue 09:00)": {
       "main": [
         [
           {
@@ -190,6 +265,22 @@
           {
             "node": "Synthesize \u00b7 LLM Chain",
             "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format \u00b7 Brief": {
+      "main": [
+        [
+          {
+            "node": "Post to Slack Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
             "index": 0
           }
         ]
