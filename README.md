@@ -35,3 +35,30 @@ The polite scraper for books.toscrape.com lives in [`be-05-scraper/`](be-05-scra
 It walks all three catalogue pages, caches every response, validates 60 book
 records into `output/books.json`, and survives injected failures. See
 [its README](be-05-scraper/README.md) for the checkpoints and AI-vs-me.
+
+## Week 6 · Assignment BE-06 — Your first background job
+
+The async enrichment API lives in [`be-06-background-job/`](be-06-background-job/).
+It wraps the BE-07 pipeline in a job queue: `POST /enrich` returns `202` + `job_id`,
+a Redis-backed worker pool processes jobs with retries and a dead-letter queue.
+See [its README](be-06-background-job/README.md) for endpoints, docker-compose, and AI-vs-me.
+
+## Week 7 · Assignment BE-07 — Put an LLM behind your API
+
+The `POST /enrich` endpoint backed by Ollama `gemma3:1b` lives in [`be-07-llm/`](be-07-llm/).
+Schema-validated output, retry policies, quarantine log, 6 pytest tests passing.
+See [its README](be-07-llm/README.md) for the job card, eval results, and AI-vs-me.
+
+## Week 8 · Assignment BE-08 — PDF Report Generator
+
+The async report generator lives in [`be-08-pdf-report/`](be-08-pdf-report/).
+It wraps the BE-06 job queue pattern with PostgreSQL (from BE-04) and ReportLab PDF generation.
+`POST /reports` returns `202` + `job_id`, a worker pool generates PDFs, with idempotency, DLQ, and download endpoint.
+See [its README](be-08-pdf-report/README.md) for endpoints, docker-compose, and AI-vs-me.
+
+## Week 9 · Assignment BE-09 — AI Decision Flow with React Flow + Inngest
+
+The visual AI workflow system lives in [`be-09-decision-flow/`](be-09-decision-flow/).
+Next.js + React Flow frontend with Inngest workflow execution, OpenAI LLM returns YES/NO decisions.
+Save/load workflows as JSON, execution logs panel, animated edges.
+See [its README](be-09-decision-flow/README.md) for endpoints, docker-compose, and AI-vs-me.

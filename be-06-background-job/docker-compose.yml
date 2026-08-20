@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build:
+      context: ..
+      dockerfile: be-06-background-job/Dockerfile
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8006:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - LLM_BASE_URL=http://host.docker.internal:11434/v1
+      - LLM_API_KEY=ollama
+      - LLM_MODEL=gemma3:1b
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ../be-07-llm:/app/be-07-llm:ro
+      - ./logs:/app/logs
+
+  worker:
+    build:
+      context: ..
+      dockerfile: be-06-background-job/Dockerfile
+    command: python worker/main.py
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - LLM_BASE_URL=http://host.docker.internal:11434/v1
+      - LLM_API_KEY=ollama
+      - LLM_MODEL=gemma3:1b
+      - WORKER_ID=worker-1
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ../be-07-llm:/app/be-07-llm:ro
+      - ./logs:/app/logs
+    deploy:
+      replicas: 2
+
+volumes:
+  redis_data:
