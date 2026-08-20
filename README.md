@@ -1,6 +1,6 @@
 # 🚀 FlyRank Backend Engineering Internship
 
-> **Comprehensive 8-Week Engineering Portfolio & Deliverables**  
+> **Comprehensive Backend Engineering Portfolio & Deliverables**  
 > **Author**: [Ahmed Shahin](https://ahmedshahin2345.github.io/)  
 > **Live Portfolio**: [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/)  
 > **Main Repository**: [github.com/AhmedShahin2345/FlyRank](https://github.com/AhmedShahin2345/FlyRank)  
