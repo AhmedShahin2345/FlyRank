@@ -1,0 +1,58 @@
+[
+  {
+    "title": "The Great Gatsby",
+    "description": "A classic American novel about the Jazz Age.",
+    "price_gbp": 12.99,
+    "expected_category": "fiction",
+    "expected_summary": "Classic American novel set in the Jazz Age"
+  },
+  {
+    "title": "How to Win Friends and Influence People",
+    "description": "A self-help book by Dale Carnegie.",
+    "price_gbp": 10.50,
+    "expected_category": "self_help",
+    "expected_summary": "Self-help guide on interpersonal skills"
+  },
+  {
+    "title": "The Very Hungry Caterpillar",
+    "description": "A children's picture book by Eric Carle.",
+    "price_gbp": 8.99,
+    "expected_category": "children",
+    "expected_summary": "Children's picture book about a caterpillar"
+  },
+  {
+    "title": "The Art of War",
+    "description": "Ancient Chinese military treatise.",
+    "price_gbp": 15.00,
+    "expected_category": "nonfiction",
+    "expected_summary": "Ancient Chinese military treatise on warfare"
+  },
+  {
+    "title": "Bestseller Title",
+    "description": "",
+    "price_gbp": 0.00,
+    "expected_category": "other",
+    "expected_summary": "No description provided, price is zero"
+  },
+  {
+    "title": "10 Steps to Success",
+    "description": "A guide to achieving success in business.",
+    "price_gbp": 25.99,
+    "expected_category": "self_help",
+    "expected_summary": "Guide to achieving success in business"
+  },
+  {
+    "title": "The Mystery of the Missing Key",
+    "description": "A thrilling mystery novel with unexpected twists.",
+    "price_gbp": 14.99,
+    "expected_category": "fiction",
+    "expected_summary": "Thrilling mystery novel with unexpected twists"
+  },
+  {
+    "title": "This Is Not a Book About Anything",
+    "description": "A book that doesn't really say anything specific.",
+    "price_gbp": 18.99,
+    "expected_category": "other",
+    "expected_summary": "Unclear category, ambiguous content"
+  }
+]

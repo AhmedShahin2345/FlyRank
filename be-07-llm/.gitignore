@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 logs/quarantine.jsonl
 logs/cost.log
+cache/

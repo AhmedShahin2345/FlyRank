@@ -159,6 +159,64 @@ python -m unittest tests.test_pipeline -v
 Six tests cover the retry policy (401/400 not retried, 429/5xx retried then
 given up), the repair-once path, and the quarantine-on-failure path.
 
+## AI vs me (bonus stage)
+
+I wrote a specification from memory (`ai-version/SPEC.md`) and asked an LLM
+(qwen3-coder, run locally) to build the same endpoint in quarantine
+(`ai-version/`). Then I ran it against this assignment's own checkpoints.
+It failed the very first one:
+
+```
+$ python -c "import src.app"
+NameError: name 'Enum' is not defined
+```
+
+The AI's `schema.py` declares `class Category(str, Enum)` but never imports
+`Enum` — the app cannot start, so every checkpoint below fails with it. Three
+more concrete differences, named:
+
+1. **It cannot run (missing imports).** Beyond `Enum`, `pipeline.py` uses
+   `os.getenv` and `Path` without importing either module — even after the
+   `Enum` fix, the first request would crash with `NameError`. My version
+   imports everything it uses and passed all six stages' checkpoints.
+2. **It claims a 400 contract it does not implement.** Its README says "Input
+   validation with HTTP 400 responses", but there is no validation-error
+   handler: FastAPI's default 422 leaks through, and the error body is a raw
+   list of pydantic errors instead of a message naming the field. My version
+   has an explicit 400 handler that names the offending field.
+3. **The repair call breaks its own injection defence.** It glues the repair
+   instruction into the *system* prompt and omits the broken output from the
+   message. My spec said "same prompt plus the broken output plus the
+   validation error" as a *user* message. The AI's choice mixes instructions
+   and data and makes the repair blind — it cannot see what it got wrong.
+4. **No defence for raw control characters.** When the model emits a literal
+   newline inside a JSON string, the AI version quarantines a perfectly
+   reparable answer. My version escapes control characters before parsing
+   (the fix that took the eval from 6/8 to 7/8).
+5. **Silent deviations from the spec.** I never specified the md5 cache key or
+   the module-level `cache_dir.mkdir()` side effect at import time, nor that
+   the retry loop's `except Exception` should swallow connection errors and
+   re-call the model — the AI decided all of that on its own without asking.
+
+**What the AI did better:** it produced a complete, well-named file layout and
+a correct retry-with-backoff loop structure in one shot, and its `run_eval.py`
+reads cleanly. I understand all of it — which is exactly why the missing-import
+bug was a two-second catch rather than a mystery.
+
+**What my spec forgot to say:** the location of the quarantine log format
+("timestamp, input, raw output, error, prompt version" — I only said "a line
+containing the input"), and that the eval script must exit non-zero on a miss.
+Small gaps, but each one let the AI choose for me.
+
+**One rematch:** I added those two missing lines to the spec and regenerated
+once — the output still skipped the `Enum` import. The model was told the
+output shape but not told to verify its own imports, so it did not verify. That
+is the whole lesson: an AI's output is exactly as good as the specification,
+and I could only judge it because I had built the thing myself first.
+
+Full spec: `ai-version/SPEC.md`. AI code: `ai-version/src/` (kept as-is,
+broken imports included).
+
 ## Files
 
 ```
