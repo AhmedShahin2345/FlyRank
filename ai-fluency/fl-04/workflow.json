@@ -1,0 +1,202 @@
+{
+ "name": "Weekly Industry Brief (FL-04)",
+ "nodes": [
+  {
+   "id": "wh-1",
+   "name": "Webhook",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "fl04-brief",
+   "parameters": {
+    "path": "brief",
+    "httpMethod": "POST",
+    "responseMode": "lastNode"
+   }
+  },
+  {
+   "id": "set-1",
+   "name": "Input",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    220,
+    0
+   ],
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "1",
+       "name": "url",
+       "value": "={{ $json.body.url }}",
+       "type": "string"
+      },
+      {
+       "id": "2",
+       "name": "topic",
+       "value": "={{ $json.body.topic }}",
+       "type": "string"
+      },
+      {
+       "id": "3",
+       "name": "max_items",
+       "value": "={{ $json.body.max_items }}",
+       "type": "number"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "rss-1",
+   "name": "Gather \u00b7 RSS Feed",
+   "type": "n8n-nodes-base.rssFeedRead",
+   "typeVersion": 1.2,
+   "position": [
+    440,
+    0
+   ],
+   "parameters": {
+    "url": "={{ $json.url }}"
+   }
+  },
+  {
+   "id": "lim-1",
+   "name": "Limit",
+   "type": "n8n-nodes-base.limit",
+   "typeVersion": 1,
+   "position": [
+    560,
+    0
+   ],
+   "parameters": {
+    "maxItems": "={{ $('Input').first().json.max_items }}"
+   }
+  },
+  {
+   "id": "ollama-1",
+   "name": "Synthesize \u00b7 Ollama (gemma3:1b)",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+   "typeVersion": 1,
+   "position": [
+    660,
+    120
+   ],
+   "parameters": {
+    "model": "gemma3:1b",
+    "baseUrl": "http://127.0.0.1:11434"
+   },
+   "credentials": {
+    "ollamaApi": {
+     "id": "1nNdK2Q5uooDKj93",
+     "name": "Ollama Local"
+    }
+   }
+  },
+  {
+   "id": "llm-1",
+   "name": "Synthesize \u00b7 LLM Chain",
+   "type": "@n8n/n8n-nodes-langchain.chainLlm",
+   "typeVersion": 1.5,
+   "position": [
+    660,
+    0
+   ],
+   "parameters": {
+    "promptType": "define",
+    "text": "You write a weekly industry brief on the topic \"{{ $json.topic }}\". The article below is one item from the feed. Respond with exactly three lines:\nINSIGHT: one sentence, what the reader should remember\nTAG: one of [gen-z, retail, social, data, campaigns, platform]\nRELEVANCE: one sentence, why a youth-marketing operator should care\n\nArticle:\nTitle: {{ $json.title }}\nLink: {{ $json.link }}\nDescription: {{ $json.contentSnippet }}",
+    "options": {
+     "systemMessage": "You write crisp industry briefs for a youth-marketing operator. Never invent facts, never ask for input, never add preamble. Output only the three labelled lines. Keep every line under 25 words."
+    }
+   }
+  },
+  {
+   "id": "fmt-1",
+   "name": "Format \u00b7 Brief",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    900,
+    0
+   ],
+   "parameters": {
+    "jsCode": "const items = $('Limit').all();\nconst briefs = $('Synthesize \u00b7 LLM Chain').all();\nconst topic = $('Input').first().json.topic ?? '';\nconst out = [];\nconst n = Math.min(items.length, briefs.length);\nfor (let i = 0; i < n; i++) {\n  out.push({\n    title: items[i].json.title ?? 'untitled',\n    link: items[i].json.link ?? '',\n    ai: briefs[i].json.text ?? ''\n  });\n}\nreturn [{ json: { topic, generated_at: new Date().toISOString(), count: out.length, briefs: out } }];"
+   }
+  }
+ ],
+ "connections": {
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "Input",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Input": {
+   "main": [
+    [
+     {
+      "node": "Gather \u00b7 RSS Feed",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gather \u00b7 RSS Feed": {
+   "main": [
+    [
+     {
+      "node": "Limit",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Limit": {
+   "main": [
+    [
+     {
+      "node": "Synthesize \u00b7 LLM Chain",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Synthesize \u00b7 LLM Chain": {
+   "main": [
+    [
+     {
+      "node": "Format \u00b7 Brief",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Synthesize \u00b7 Ollama (gemma3:1b)": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Synthesize \u00b7 LLM Chain",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ }
+}
