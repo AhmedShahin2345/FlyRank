@@ -78,3 +78,46 @@ The database open in DB Browser for SQLite, showing the seeded tasks:
 - Timestamps: `created_at` / `updated_at` added via `ALTER TABLE`
 - Index on `title` to speed up the search extra
 - Seeding wrapped in a transaction (all-or-nothing)
+
+## Stage 6 — AI vs me
+
+I asked an AI assistant to do the same memory-to-SQLite migration, kept its
+answer in quarantine in [`ai-version/`](ai-version/), ran it, and diffed it
+against my hand-built version. My prompt is in
+[`ai-version/README.md`](ai-version/README.md).
+
+The AI version **started on the first try** and created its own `tasks.db`, and
+rows I added survived a restart. But testing and the diff exposed real
+differences:
+
+**What it did better:** it put everything in one readable file and used
+`AUTOINCREMENT` cleanly, and its UPDATE-then-fetch pattern is compact. Its
+schema creation was fine on a fresh database.
+
+**What it got wrong or quietly ignored:**
+
+1. **The seed multiplied on every restart.** It inserted the three examples
+   unconditionally at import time. Boot 1 had 3 rows; boot 2 had 6. My version
+   counts rows first and seeds only when the table is empty.
+2. **DELETE returned `200` with `{"deleted": true}`** instead of the A1
+   contract's `204` with an empty body. The status-code contract changed
+   without anyone asking for it.
+3. **An empty title returned `422`, not `400`.** Because it declared
+   `title: str` as a required function argument, FastAPI rejected the request
+   before my validation could run. The assignment's 400 rule was silently lost.
+4. **One query was string-glued SQL.** `GET /tasks/{id}` built the query with
+   `f"SELECT * FROM tasks WHERE id = {task_id}"` — exactly the SQL-injection
+   pattern the assignment bans. Everything else used `?`, but one slip is all
+   an attacker needs.
+
+**What my prompt forgot to specify:** it said "seed three example tasks" but
+not *"only when the table is empty"* — the AI chose the eager interpretation.
+It also didn't say *"return 204 with an empty body"* or *"400 as a JSON error
+for a missing or empty title"*, so the AI quietly decided those for me.
+
+**The rematch:** I rewrote the prompt to add the empty-table seed guard, the
+204-on-delete, the exact 400 JSON shape, and "every query must use `?`
+placeholders". The regenerated version fixed the seed duplication and the 204,
+but still produced 422 for an empty title until I spelled out the validation
+step in the prompt — proof that the AI's output is exactly as good as the
+specification.
