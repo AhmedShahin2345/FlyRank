@@ -10,26 +10,29 @@
 
 ---
 
-## Backend Engineering Track
+## ⚙️ Backend AI Engineering Track
 
 | Assignment | Repo Path | Description / Live Endpoint | Status |
 |---|---|---|---|
-| **BE-03: Auth API** | [`be-03-auth/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-03-auth/) | FastAPI + Supabase Auth (`/auth/signup`, `/auth/login`, `/auth/logout`, `/protected/profile`, `/protected/dashboard`), 11 automated pytest tests passing | ✅ Complete & Tested |
-| **BE-03: SQLite CRUD** | [`be-03-sqlite/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-03-sqlite/) | SQLite backend with schema migrations and parameterized SQL queries | ✅ Complete |
-| **BE-04: Containerize** | [`be-04-containerize/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-04-containerize/) | Docker & Docker Compose setup for PostgreSQL and FastAPI service | ✅ Complete |
-| **BE-05: Book Scraper** | [`be-05-scraper/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-05-scraper/) | Polite web scraper with caching, schema normalization (60 books), 7 pytest tests passing | ✅ Complete & Tested |
-| **BE-06: Background Job** | [`be-06-background-job/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-06-background-job/) | Async `POST /enrich` → `202` + `job_id`, Redis queue, worker pool, idempotency, exponential backoff, dead-letter queue, 12 pytest tests passing | ✅ Complete & Tested |
-| **BE-07: LLM Pipeline** | [`be-07-llm/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-07-llm/) | `POST /enrich` endpoint backed by Ollama `gemma3:1b` with retry policies, quarantine log, 6 pytest tests passing | ✅ Complete & Tested |
-| **BE-08: PDF Report Generator** | [`be-08-pdf-report/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-08-pdf-report/) | Async `POST /reports` → `202` + `job_id`, PostgreSQL + ReportLab PDF generation, worker pool, idempotency, DLQ, download endpoint | ✅ Complete |
-| **BE-09: AI Decision Flow** | [`be-09-decision-flow/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/be-09-decision-flow/) | Next.js + React Flow + Inngest visual workflow editor, OpenAI LLM decisions (YES/NO), save/load JSON, execution logs | ✅ Complete |
+| **BE-01: Simple Server** | [`backend-ai-engineering/be-01-simple-server/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-01-simple-server/) | Native Python HTTP server with `/hello` and `/time` endpoints | ✅ Complete |
+| **BE-03: Auth API** | [`backend-ai-engineering/be-03-auth/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-03-auth/) | FastAPI + Supabase Auth (`/auth/signup`, `/auth/login`, `/auth/logout`, `/protected/profile`, `/protected/dashboard`), 11 automated pytest tests passing | ✅ Complete & Tested |
+| **BE-03: SQLite CRUD** | [`backend-ai-engineering/be-03-sqlite/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-03-sqlite/) | SQLite backend with schema migrations and parameterized SQL queries | ✅ Complete |
+| **BE-04: Containerize** | [`backend-ai-engineering/be-04-containerize/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-04-containerize/) | Docker & Docker Compose setup for PostgreSQL and FastAPI service | ✅ Complete |
+| **BE-05: Book Scraper** | [`backend-ai-engineering/be-05-scraper/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-05-scraper/) | Polite web scraper with caching, schema normalization (60 books), 7 pytest tests passing | ✅ Complete & Tested |
+| **BE-06: Background Job** | [`backend-ai-engineering/be-06-background-job/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-06-background-job/) | Async `POST /enrich` → `202` + `job_id`, Redis queue, worker pool, idempotency, exponential backoff, dead-letter queue, 12 pytest tests passing | ✅ Complete & Tested |
+| **BE-07: LLM Pipeline** | [`backend-ai-engineering/be-07-llm/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-07-llm/) | `POST /enrich` endpoint backed by Ollama `gemma3:1b` with retry policies, quarantine log, 6 pytest tests passing | ✅ Complete & Tested |
+| **BE-08: PDF Report Generator** | [`backend-ai-engineering/be-08-pdf-report/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-08-pdf-report/) | Async `POST /reports` → `202` + `job_id`, PostgreSQL + ReportLab PDF generation, worker pool, idempotency, DLQ, download endpoint | ✅ Complete |
+| **BE-09: AI Decision Flow** | [`backend-ai-engineering/be-09-decision-flow/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-09-decision-flow/) | Next.js + React Flow + Inngest visual workflow editor, OpenAI LLM decisions (YES/NO), save/load JSON, execution logs | ✅ Complete |
 
 ---
 
-## AI Fluency Track
+## 🧠 AI Fluency Track
 
 | Week | Milestone / Assignment | Repo Path / URL | Evidence / Artifacts | Status |
 |---|---|---|---|---|
-| **W3** | Identity Kit | [`ai-fluency/identity/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/identity/) | [`week-3-identity-kit.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/week-3-identity-kit.md), fonts, colors, monogram SVG | ✅ Complete |
+| **W1** | AI Workflow Audit & Sitemap | [`ai-fluency/FL-01-AI-Workflow-Audit.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/FL-01-AI-Workflow-Audit.md) | Sitemap, Proof Statement, Sketch | ✅ Complete |
+| **W2** | Prompt Engineering & Ladders | [`ai-fluency/FL-02-Prompt-Ladder.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/FL-02-Prompt-Ladder.md) | Framed Cases, Iteration Log, Screenshots | ✅ Complete |
+| **W3** | Identity Kit | [`ai-fluency/identity/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/identity/) | [`week-3-identity-kit.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/week-3-identity-kit.md), fonts, monogram SVG | ✅ Complete |
 | **W3** | Through-Line Claim | [`ai-fluency/week-3-through-line.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/week-3-through-line.md) | Claim + Content Strategy Map | ✅ Complete |
 | **W4** | Three Roads Exploration | [`ai-fluency/week-4-three-roads.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/week-4-three-roads.md) | Three design variants evaluation | ✅ Complete |
 | **W4** | Empty but Live Site | https://ahmedshahin2345.github.io/ | [`ai-fluency/evidence/empty-but-live.png`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/evidence/empty-but-live.png) | ✅ Complete |
@@ -40,10 +43,12 @@
 | **W5** | Explain It Like You Built It | [`ai-fluency/week-5-explain-it-like-you-built-it.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/week-5-explain-it-like-you-built-it.md) | Systems reflection & architecture retrospective | ✅ Complete |
 | **W5** | FL-06: Agent Specification | [`ai-fluency/fl-06-agent-spec.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-06-agent-spec.md) | 5 evaluation test cases, platform trade-offs | ✅ Complete |
 | **W5** | FL-07: Brief Scout Workflow | [`ai-fluency/fl-07-agent-workflow.json`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-07-agent-workflow.json) | [`ai-fluency/fl-07-build-log.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-07-build-log.md) (9 real failures documented & resolved) | ✅ Complete |
-| **W6** | Make It Do Something (Scheduler + Slack) | [`ai-fluency/fl-07-agent-workflow.json`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-07-agent-workflow.json) | Cron schedule trigger (Every Tue 09:00) + Slack webhook dispatch node | ✅ Complete |
+| **W5** | FL-07: Screen Capture Demo | [`ai-fluency/evidence/fl-07-agent-run.mov`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/evidence/fl-07-agent-run.mov) | 2-minute unedited 720p screen capture recording of live agent run | ✅ Complete |
+| **W6** | Make It Do Something (Scheduler + Slack) | [`ai-fluency/fl-07-agent-workflow.json`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-07-agent-workflow.json) | [`ai-fluency/w6-make-it-do-something-explainer.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/w6-make-it-do-something-explainer.md) | ✅ Complete |
+| **W6** | Mobile Responsiveness Fixes | [`ai-fluency/w6-mobile-fix-log.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/w6-mobile-fix-log.md) | Mobile responsiveness documentation across devices | ✅ Complete |
 | **W6** | Phone Check Review | [`ai-fluency/w6-phone-check-notes.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/w6-phone-check-notes.md) | 3 likes, 3 improvements, peer review action items | ✅ Complete |
 | **W6** | Survive the Crit | [`ai-fluency/w6-survive-the-crit.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/w6-survive-the-crit.md) | Public critique collection, top 3 fixes implemented | ✅ Complete |
-| **W7** | Break Your Own Site | [`ai-fluency/break-your-own-site.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/break-your-own-site.md) | 8 bugs found, 7 fixed, SEO/meta added, PageSpeed 92 | ✅ Complete |
+| **W7** | Break Your Own Site | [`ai-fluency/break-your-own-site.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/break-your-own-site.md) | 8 bugs audited, 7 fixed, SEO/meta added, PageSpeed 92 | ✅ Complete |
 | **W7** | Plant Your Flag | [`ai-fluency/plant-your-flag.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/plant-your-flag.md) | Subdomain + Plausible analytics + FlyRank badge | ✅ Complete |
 | **W8** | FL-09: Docs + Demo Video | [`ai-fluency/fl-09-docs-demo/README.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-09-docs-demo/README.md) | README + unlisted YouTube demo (3:47) | ✅ Complete |
 | **W8** | FL-10: Capstone Package | [`ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md) | Index + Retrospective + Hours Log + Build-in-Public post | ✅ Complete |
@@ -51,16 +56,18 @@
 
 ---
 
-## Internship Portal Submission Mapping
+## 📬 Internship Portal Submission Direct Mapping
 
-| Portal Card | URL to Paste | Attachment to Upload |
+| Portal Card | URL to Paste | Attachment / File to Upload |
 |---|---|---|
-| **BE-03 Auth API** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-03-auth` | `be-03-auth/README.md` |
-| **BE-06 Background Job** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-06-background-job` | `be-06-background-job/README.md` |
-| **BE-08 PDF Report Generator** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-08-pdf-report` | `be-08-pdf-report/README.md` |
-| **BE-09 AI Decision Flow** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-09-decision-flow` | `be-09-decision-flow/README.md` |
-| **BE-05 Scraper** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-05-scraper` | `be-05-scraper/output/run-report.json` |
-| **BE-07 LLM API** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/be-07-llm` | `be-07-llm/README.md` |
+| **BE-03 Auth API** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-03-auth` | `backend-ai-engineering/be-03-auth/README.md` |
+| **BE-05 Scraper** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-05-scraper` | `backend-ai-engineering/be-05-scraper/output/run-report.json` |
+| **BE-06 Background Job** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-06-background-job` | `backend-ai-engineering/be-06-background-job/README.md` |
+| **BE-07 LLM API** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-07-llm` | `backend-ai-engineering/be-07-llm/README.md` |
+| **BE-08 PDF Generator** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-08-pdf-report` | `backend-ai-engineering/be-08-pdf-report/README.md` |
+| **BE-09 Decision Flow** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-09-decision-flow` | `backend-ai-engineering/be-09-decision-flow/README.md` |
+| **W1 Audit & Sitemap** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/FL-01-AI-Workflow-Audit.md` | `ai-fluency/FL-01-Portfolio-Sitemap.md` |
+| **W2 Prompt Ladder** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/FL-02-Prompt-Ladder.md` | `ai-fluency/FL-02-Prompt-Iteration-Log.md` |
 | **W3 Identity Kit** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/identity` | `ai-fluency/week-3-identity-kit.md` |
 | **W3 Through-Line** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/week-3-through-line.md` | `ai-fluency/week-3-through-line.md` |
 | **W4 Three Roads** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/week-4-three-roads.md` | `ai-fluency/week-4-three-roads.md` |
@@ -72,12 +79,13 @@
 | **W5 Explain It Like You Built It** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/week-5-explain-it-like-you-built-it.md` | `ai-fluency/week-5-explain-it-like-you-built-it.md` |
 | **W5 FL-06 Agent Spec** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-06-agent-spec.md` | `ai-fluency/fl-06-agent-spec.md` |
 | **W5 FL-07 Agent Workflow** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-07-agent-workflow.json` | `ai-fluency/fl-07-build-log.md` |
-| **W6 Make It Do Something** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-07-agent-workflow.json` | `ai-fluency/fl-07-agent-workflow.json` |
+| **W5 FL-07 Screen Capture** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/evidence/fl-07-agent-run.mov` | `ai-fluency/evidence/fl-07-agent-run.mov` |
+| **W6 Make It Do Something** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-07-agent-workflow.json` | `ai-fluency/w6-make-it-do-something-explainer.md` |
 | **W6 Phone Check** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/w6-phone-check-notes.md` | `ai-fluency/w6-phone-check-notes.md` |
 | **W6 Survive the Crit** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/w6-survive-the-crit.md` | `ai-fluency/w6-survive-the-crit.md` |
-| **W7 Break Your Own Site** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/break-your-own-site.md` | `ai-fluency/evidence/break-your-own-site.png` |
-| **W7 Plant Your Flag** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/plant-your-flag.md` | `ai-fluency/evidence/plant-your-flag-analytics.png` |
-| **W8 FL-09 Docs + Demo** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-09-docs-demo/README.md` | `ai-fluency/fl-09-docs-demo/DEMO_VIDEO.md` |
-| **W8 FL-10 Capstone** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md` | `ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md` |
+| **W7 Break Your Own Site** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/break-your-own-site.md` | `ai-fluency/break-your-own-site.md` |
+| **W7 Plant Your Flag** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/plant-your-flag.md` | `ai-fluency/plant-your-flag.md` |
+| **W8 FL-09 Docs & Demo** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/fl-09-docs-demo` | `ai-fluency/fl-09-docs-demo/DEMO_VIDEO.md` |
+| **W8 FL-10 Capstone** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/fl-10-capstone` | `ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md` |
 | **W8 Plan to Keep Building** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/future-plan.md` | `ai-fluency/future-plan.md` |
 

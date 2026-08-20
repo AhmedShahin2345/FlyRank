@@ -1,64 +1,105 @@
-# FlyRank API
+# 🚀 FlyRank Software Engineering Internship
 
-A simple HTTP server with two JSON endpoints.
+> **Comprehensive 8-Week Engineering Portfolio & Deliverables**  
+> **Author**: [Ahmed Shahin](https://ahmedshahin2345.github.io/)  
+> **Live Portfolio**: [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/)  
+> **Repository**: [github.com/AhmedShahin2345/FlyRank](https://github.com/AhmedShahin2345/FlyRank)  
+> **Resume**: [`CV_Ahmed_Shahin.pdf`](CV_Ahmed_Shahin.pdf)
 
-## Setup
+---
 
-1. Run the server:
-   ```bash
-   python3 server.py
-   ```
-2. The server will start on port 3000.
+## 📌 Repository Overview
 
-## Endpoints
+This repository contains all technical deliverables, production services, automation workflows, and milestone projects completed during the 8-week FlyRank Software Engineering Internship.
 
-- `GET /hello` - Returns a hello message
-- `GET /time` - Returns the current UTC time
+The codebase is organized into **two primary engineering tracks**:
 
-## Week 3 · Assignment A2 — Connecting CRUD to the database
+```
+FlyRank/
+├── ai-fluency/                # 🧠 Track 1: AI systems, prompt ladders, n8n agents, MCP & capstone
+│   ├── identity/             # Design kit, monogram SVG, and typography tokens
+│   ├── fl-04/                # n8n industry brief workflow + 5 verified run outputs
+│   ├── mcp-setup/            # Model Context Protocol filesystem server configs
+│   ├── fl-09-docs-demo/      # System documentation + YouTube video demo
+│   ├── fl-10-capstone/       # Capstone package, retrospective, hours log & build-in-public post
+│   ├── evidence/             # Screenshots, canvas captures, and 2-min unedited demo video
+│   ├── fl-07-agent-workflow.json # Autonomous Brief Scout agent with cron scheduler & Slack dispatch
+│   └── README.md             # AI Fluency track index & curriculum
+│
+├── backend-ai-engineering/   # ⚙️ Track 2: Production microservices, auth, queues, scrapers, PDF & decision flow
+│   ├── be-01-simple-server/  # Native Python HTTP microservice
+│   ├── be-03-auth/           # FastAPI + Supabase Auth with JWT bearer dependency (11 tests pass)
+│   ├── be-03-sqlite/         # SQLite3 task CRUD API with schema migrations & parameterized SQL
+│   ├── be-04-containerize/   # Multi-container Docker & Docker Compose setup with PostgreSQL
+│   ├── be-05-scraper/        # Polite web scraper with disk cache & schema normalizer (7 tests pass)
+│   ├── be-06-background-job/ # Async Redis queue worker pool with idempotency & DLQ (12 tests pass)
+│   ├── be-07-llm/            # FastAPI LLM enrichment pipeline backed by Ollama gemma3:1b (6 tests pass)
+│   ├── be-08-pdf-report/     # Async PostgreSQL + ReportLab PDF generation worker & download endpoint
+│   ├── be-09-decision-flow/  # Next.js + React Flow + Inngest interactive visual AI decision editor
+│   └── README.md             # Backend AI Engineering track index & test instructions
+│
+├── CV_Ahmed_Shahin.pdf       # Updated CV with live portfolio link
+├── DELIVERABLES.md           # Comprehensive 8-week portal submission card mapping
+└── README.md                 # Root portfolio overview
+```
 
-The full CRUD task API backed by SQLite lives in [`be-03-sqlite/`](be-03-sqlite/).
-Same five endpoints as Assignment 1, but data is stored in `tasks.db` and
-survives restarts. See [its README](be-03-sqlite/README.md) for setup, the
-why-SQLite explanation, example SQL, and the DB Browser screenshot.
+---
 
-## Week 4 · Assignment BE-03 — Auth: login & protect
+## 🧠 Track 1: AI Fluency
 
-The FastAPI + Supabase auth API lives in [`be-03-auth/`](be-03-auth/).
-Signup, login, logout, and bearer-protected routes backed by Supabase Auth.
-See [its README](be-03-auth/README.md) for the route table, curl examples,
-and the AI-vs-me comparison.
+The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits and prompt ladders to autonomous agent architectures, local LLM pipelines, and capstone deployment:
 
-## Week 5 · Assignment BE-05 — The polite scraper
+- **Autonomous Brief Scout Agent (FL-07 & W6)**:
+  - Webhook endpoint (`POST /webhook/brief-agent`) and recurring cron trigger (`0 9 * * 2` Every Tuesday 09:00).
+  - Fetches external RSS feeds, synthesizes executive summaries via local **Ollama (`gemma3:1b`)**, writes persistent Markdown briefs to disk, and dispatches outbound alerts.
+- **Model Context Protocol (FL-05 MCP)**:
+  - Local filesystem MCP server configuration and verified tool executions.
+- **Brand Identity & Live Portfolio (W3–W5, W7)**:
+  - Design kit, custom monogram SVG, DNS/hosting architecture walkthrough, and production deployment at [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/).
+- **Capstone Package (FL-10)**:
+  - Comprehensive systems retrospective, detailed hours log, and build-in-public announcement.
 
-The polite scraper for books.toscrape.com lives in [`be-05-scraper/`](be-05-scraper/).
-It walks all three catalogue pages, caches every response, validates 60 book
-records into `output/books.json`, and survives injected failures. See
-[its README](be-05-scraper/README.md) for the checkpoints and AI-vs-me.
+👉 *Explore full AI Fluency deliverables in [`ai-fluency/README.md`](ai-fluency/README.md).*
 
-## Week 6 · Assignment BE-06 — Your first background job
+---
 
-The async enrichment API lives in [`be-06-background-job/`](be-06-background-job/).
-It wraps the BE-07 pipeline in a job queue: `POST /enrich` returns `202` + `job_id`,
-a Redis-backed worker pool processes jobs with retries and a dead-letter queue.
-See [its README](be-06-background-job/README.md) for endpoints, docker-compose, and AI-vs-me.
+## ⚙️ Track 2: Backend AI Engineering
 
-## Week 7 · Assignment BE-07 — Put an LLM behind your API
+The **[Backend AI Engineering Track](backend-ai-engineering/)** encompasses production backend patterns from HTTP fundamentals to asynchronous queues, PDF compilers, and interactive decision flow engines:
 
-The `POST /enrich` endpoint backed by Ollama `gemma3:1b` lives in [`be-07-llm/`](be-07-llm/).
-Schema-validated output, retry policies, quarantine log, 6 pytest tests passing.
-See [its README](be-07-llm/README.md) for the job card, eval results, and AI-vs-me.
+| Module | Description | Technologies | Test Status |
+|---|---|---|---|
+| **[BE-01](backend-ai-engineering/be-01-simple-server/)** | Simple HTTP Server | Python `http.server` | Foundational routing |
+| **[BE-03 Auth](backend-ai-engineering/be-03-auth/)** | Auth API & JWT Guard | FastAPI, Supabase Auth, Pytest | **11/11 Passed** |
+| **[BE-03 SQLite](backend-ai-engineering/be-03-sqlite/)** | Task CRUD API | SQLite3, Parameterized SQL | Verified Persistence |
+| **[BE-04](backend-ai-engineering/be-04-containerize/)** | Containerization | Docker, Docker Compose, PostgreSQL | Multi-Container |
+| **[BE-05](backend-ai-engineering/be-05-scraper/)** | Polite Web Scraper | BeautifulSoup4, Requests, Pydantic | **7/7 Passed** (60 books) |
+| **[BE-06](backend-ai-engineering/be-06-background-job/)** | Asynchronous Job Worker | FastAPI, Redis, Worker Pool | **12/12 Passed** |
+| **[BE-07](backend-ai-engineering/be-07-llm/)** | LLM API Pipeline | FastAPI, Ollama (`gemma3:1b`), Pydantic | **6/6 Passed** |
+| **[BE-08](backend-ai-engineering/be-08-pdf-report/)** | PDF Report Generator | FastAPI, PostgreSQL, ReportLab | Async Document Worker |
+| **[BE-09](backend-ai-engineering/be-09-decision-flow/)** | AI Decision Flow Editor | Next.js, React Flow, Inngest | Interactive Graph Editor |
 
-## Week 8 · Assignment BE-08 — PDF Report Generator
+👉 *Explore backend modules and setup instructions in [`backend-ai-engineering/README.md`](backend-ai-engineering/README.md).*
 
-The async report generator lives in [`be-08-pdf-report/`](be-08-pdf-report/).
-It wraps the BE-06 job queue pattern with PostgreSQL (from BE-04) and ReportLab PDF generation.
-`POST /reports` returns `202` + `job_id`, a worker pool generates PDFs, with idempotency, DLQ, and download endpoint.
-See [its README](be-08-pdf-report/README.md) for endpoints, docker-compose, and AI-vs-me.
+---
 
-## Week 9 · Assignment BE-09 — AI Decision Flow with React Flow + Inngest
+## 🧪 Quick Test Execution
 
-The visual AI workflow system lives in [`be-09-decision-flow/`](be-09-decision-flow/).
-Next.js + React Flow frontend with Inngest workflow execution, OpenAI LLM returns YES/NO decisions.
-Save/load workflows as JSON, execution logs panel, animated edges.
-See [its README](be-09-decision-flow/README.md) for endpoints, docker-compose, and AI-vs-me.
+Run automated unit and integration test suites across backend modules:
+
+```bash
+# 1. BE-03 Auth API (FastAPI + Supabase Auth)
+cd backend-ai-engineering/be-03-auth && .venv/bin/pytest tests
+
+# 2. BE-05 Scraper (Normalization & Cache)
+cd ../be-05-scraper && .venv/bin/pytest tests
+
+# 3. BE-07 LLM Pipeline (Retry Policies & Schema Repair)
+cd ../be-07-llm && .venv/bin/python tests/test_pipeline.py
+```
+
+---
+
+## 📋 Complete Deliverables & Submission Reference
+
+For a complete card-by-card internship portal submission guide with exact links and attachment mapping across all 8 weeks, refer to **[`DELIVERABLES.md`](DELIVERABLES.md)**.
