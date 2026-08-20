@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> # 🌟 Standalone Repository Notice
+> **The FlyRank Capstone Widget Platform is officially hosted and maintained as its own dedicated GitHub repository:**  
+> 👉 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
+> *(Click the link above to view the standalone repository, commit history, releases, and issue tracker)*
+
 # FL-10 — Final Capstone Package
 
 ## INDEX — All Deliverables Linked

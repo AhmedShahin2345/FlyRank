@@ -1,0 +1,47 @@
+x-app-env: &app-env
+  - .env.example
+  - path: .env
+    required: false
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: widget_platform, POSTGRES_USER: widget, POSTGRES_PASSWORD: widget }
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U widget -d widget_platform"], interval: 5s, timeout: 3s, retries: 10 }
+  redis:
+    image: redis:7-alpine
+    healthcheck: { test: ["CMD", "redis-cli", "ping"], interval: 5s, timeout: 3s, retries: 10 }
+  api:
+    build: .
+    env_file: *app-env
+    ports: ["8000:8000"]
+    depends_on: { postgres: { condition: service_healthy }, redis: { condition: service_healthy } }
+    healthcheck: { test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"], interval: 5s, timeout: 3s, retries: 10 }
+  worker:
+    build: .
+    env_file: *app-env
+    command: rq worker --url ${REDIS_URL:-redis://redis:6379/0} submissions
+    depends_on: { api: { condition: service_healthy }, redis: { condition: service_healthy } }
+  customer-site:
+    image: nginx:alpine
+    ports: ["8081:80"]
+    volumes: ["./demo-site:/usr/share/nginx/html:ro"]
+  demo-seed:
+    build: .
+    env_file: *app-env
+    environment: { PYTHONPATH: /app }
+    volumes: ["./demo-site:/app/demo-site"]
+    command: ["python", "scripts/seed_demo.py"]
+    depends_on: { api: { condition: service_healthy } }
+    profiles: ["seed"]
+  acceptance-verifier:
+    build: .
+    env_file: *app-env
+    environment:
+      API_BASE: http://api:8000
+      WIDGET_ORIGIN: http://customer-site
+      ACCEPTANCE_STATE_PATH: /verification/rate-limit.json
+    volumes: ["./.acceptance:/verification"]
+    entrypoint: ["python", "scripts/verify_acceptance.py"]
+    depends_on: { api: { condition: service_healthy }, redis: { condition: service_healthy } }
+    profiles: ["verification"]

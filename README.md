@@ -3,8 +3,17 @@
 > **Comprehensive 8-Week Engineering Portfolio & Deliverables**  
 > **Author**: [Ahmed Shahin](https://ahmedshahin2345.github.io/)  
 > **Live Portfolio**: [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/)  
-> **Repository**: [github.com/AhmedShahin2345/FlyRank](https://github.com/AhmedShahin2345/FlyRank)  
+> **Main Repository**: [github.com/AhmedShahin2345/FlyRank](https://github.com/AhmedShahin2345/FlyRank)  
+> **Capstone Repository**: [github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)  
 > **Resume**: [`CV_Ahmed_Shahin.pdf`](CV_Ahmed_Shahin.pdf)
+
+---
+
+> [!IMPORTANT]
+> # 🌟 Final Capstone Project — Standalone Repository
+> **The FlyRank Capstone Widget Platform is officially hosted in its own dedicated standalone repository:**  
+> 🔗 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
+> *(Click the link above to explore the complete standalone repository, CI/CD pipeline, and commit history. The complete codebase is also mirrored locally under [`ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/`](ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/))*
 
 ---
 
@@ -22,6 +31,7 @@ FlyRank/
 │   ├── mcp-setup/            # Model Context Protocol filesystem server configs
 │   ├── fl-09-docs-demo/      # System documentation + YouTube video demo
 │   ├── fl-10-capstone/       # Capstone package, retrospective, hours log & build-in-public post
+│   │   └── flyrank-capstone-widget-platform/ # 🌟 Complete mirrored capstone codebase
 │   ├── evidence/             # Screenshots, canvas captures, and 2-min unedited demo video
 │   ├── fl-07-agent-workflow.json # Autonomous Brief Scout agent with cron scheduler & Slack dispatch
 │   └── README.md             # AI Fluency track index & curriculum
@@ -47,8 +57,11 @@ FlyRank/
 
 ## 🧠 Track 1: AI Fluency
 
-The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits and prompt ladders to autonomous agent architectures, local LLM pipelines, and capstone deployment:
+The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits and prompt ladders to autonomous agent architectures, local LLM pipelines, and capstone delivery:
 
+- **Capstone Widget Platform (FL-10)**:
+  - Multi-tenant, isolated lead-capture platform with FastAPI, PostgreSQL, Redis/RQ worker, immutable versioned JavaScript embed bundle, and Playwright end-to-end browser tests.
+  - Dedicated repository: **[flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**
 - **Autonomous Brief Scout Agent (FL-07 & W6)**:
   - Webhook endpoint (`POST /webhook/brief-agent`) and recurring cron trigger (`0 9 * * 2` Every Tuesday 09:00).
   - Fetches external RSS feeds, synthesizes executive summaries via local **Ollama (`gemma3:1b`)**, writes persistent Markdown briefs to disk, and dispatches outbound alerts.
@@ -56,8 +69,6 @@ The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits an
   - Local filesystem MCP server configuration and verified tool executions.
 - **Brand Identity & Live Portfolio (W3–W5, W7)**:
   - Design kit, custom monogram SVG, DNS/hosting architecture walkthrough, and production deployment at [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/).
-- **Capstone Package (FL-10)**:
-  - Comprehensive systems retrospective, detailed hours log, and build-in-public announcement.
 
 👉 *Explore full AI Fluency deliverables in [`ai-fluency/README.md`](ai-fluency/README.md).*
 

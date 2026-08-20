@@ -1,0 +1,53 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -r requirements-dev.txt
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: mypy app
+      - run: pytest -q
+      - run: pip install pip-audit && pip-audit
+
+  browser-rendering:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -r requirements-dev.txt
+      - run: python -m playwright install --with-deps chromium
+      - run: RUN_BROWSER_TESTS=1 pytest -q tests/test_widget_rendering.py
+
+  compose-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the documented Compose startup command
+        run: docker compose up --build --wait
+      - name: Run the documented Compose seed command
+        run: |
+          docker compose --profile seed run --rm --no-deps demo-seed
+          test -s demo-site/demo-config.js
+      - name: Verify real Redis rate limiting and a separate client's dashboard visibility
+        run: |
+          mkdir -p .acceptance
+          docker compose --profile verification run -d --no-deps --name rate-limit-burst \
+            -e HOLD_AFTER_BURST_SECONDS=30 acceptance-verifier burst
+          for attempt in $(seq 1 30); do
+            test -f .acceptance/rate-limit.json && break
+            sleep 1
+          done
+          test -f .acceptance/rate-limit.json
+          docker compose --profile verification run --rm --no-deps acceptance-verifier independent
+          docker logs rate-limit-burst
+          test "$(docker wait rate-limit-burst)" = "0"
+          docker rm rate-limit-burst
+      - run: docker compose down --volumes

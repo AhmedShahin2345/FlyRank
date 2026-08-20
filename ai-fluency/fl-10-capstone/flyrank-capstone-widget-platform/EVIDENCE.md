@@ -1,0 +1,96 @@
+# Evidence
+
+This file contains command output from the 2026-08-20 verification session. The Compose-specific transcript comes from the completed GitHub Actions run, not from source-code inspection.
+
+## Automated requirements coverage
+
+```text
+$ RUN_BROWSER_TESTS=1 .venv/bin/pytest -q
+..............                                                           [100%]
+14 passed, 1 warning in 5.74s
+```
+
+| Requirement | Executable proof |
+| --- | --- |
+| Authenticated CRUD and tenant isolation | `test_widget_management_requires_authentication`; `test_owner_crud_is_tenant_isolated` |
+| Copyable versioned embed | `test_embed_assets_are_cacheable_and_config_is_cors_scoped` |
+| CORS, invalid payload, oversized body, honeypot, and idempotency | `test_preflight_validation_honeypot_and_idempotency`; `test_oversized_payload_is_rejected_with_413_and_cors` |
+| Widget rendering from a separate browser origin | `test_widget_renders_from_a_separate_origin` |
+| Rate limiting and independent traffic | `test_endpoint_rate_limit_returns_429_and_other_traffic_still_succeeds`; real-Redis Compose transcript below |
+| Provider fallback and full outage | `test_geo_provider_fallback_uses_second_provider`; `test_geo_outage_degrades_without_failing` |
+| Stored lead despite notification failure and a failure alert | `test_worker_keeps_submission_when_notification_fails`; `test_failure_alert_posts_actionable_payload` |
+| Durable queue retry and queue-outage alert | `test_queue_outage_persists_a_retryable_outbox_job` |
+| Dashboard totals, time series, and geography | `test_dashboard_reports_time_and_geo_breakdowns` |
+
+## Browser rendering
+
+```text
+$ RUN_BROWSER_TESTS=1 .venv/bin/pytest -q tests/test_widget_rendering.py
+.                                                                        [100%]
+1 passed in 3.91s
+```
+
+The test starts an isolated API and a distinct customer-site origin, creates an allowlisted widget through the owner API, loads the real `widget.v1.js`, and asserts the rendered heading, email input, and button in Chromium.
+
+## Migration and quality gates
+
+```text
+$ DATABASE_URL=sqlite:////private/tmp/.../widget-platform.db .venv/bin/alembic upgrade head
+INFO  [alembic.runtime.migration] Running upgrade  -> 0001_initial, Initial widget platform schema.
+
+$ DATABASE_URL=sqlite:////private/tmp/.../widget-platform.db .venv/bin/alembic current
+0001_initial (head)
+
+$ .venv/bin/ruff format --check .
+20 files already formatted
+
+$ .venv/bin/ruff check .
+All checks passed!
+
+$ .venv/bin/mypy app
+Success: no issues found in 10 source files
+
+$ .venv/bin/pip-audit
+No known vulnerabilities found
+```
+
+`pip-audit` reports the local project package as skipped because it is not published to PyPI; audited third-party dependencies had no known vulnerabilities.
+
+## Design and clean-machine setup
+
+[`compose-smoke` run 32411112664](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform/actions/runs/32411112664) ran the commands published in `capstone.yaml` and `README.md` against fresh Compose services:
+
+```text
+$ docker compose up --build --wait
+Container flyrank-capstone-widget-platform-api-1 Healthy
+
+$ docker compose --profile seed run --rm --no-deps demo-seed
+Demo login: demo@widget.local / demo-password-2026
+Embed snippet:
+<script src="http://localhost:8000/assets/widget.v1.js" data-widget-id="7992cb32-4d3d-482d-bcb5-911a5b03b257" defer></script>
+
+$ test -s demo-site/demo-config.js
+```
+
+`DESIGN.md` is the corresponding Phase 1 artifact: it states the problem, model, API surface, layer boundary, and a deliberate non-goal.
+
+## Compose acceptance
+
+The CI workflow runs these commands against its actual PostgreSQL and Redis containers:
+
+```text
+docker compose --profile verification run -d --no-deps --name rate-limit-burst \
+  -e HOLD_AFTER_BURST_SECONDS=30 acceptance-verifier burst
+docker compose --profile verification run --rm --no-deps acceptance-verifier independent
+```
+
+The burst container remains connected briefly so Docker allocates a different source address to the independent verifier. The completed [`compose-smoke` run](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform/actions/runs/32407485727) produced:
+
+```text
+REDIS_BURST_STATUSES=201 201 201 201 201 201 201 201 201 201 429
+RATE_LIMIT_STATE=/verification/rate-limit.json
+INDEPENDENT_CLIENT_STATUS=201
+DASHBOARD_VISIBILITY=confirmed
+```
+
+The job also completed `docker compose down --volumes` successfully. This proves the real Redis limiter rejected the burst while an independently addressed container could submit and the owner could immediately see that lead through the dashboard API.
