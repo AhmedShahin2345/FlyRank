@@ -1,0 +1,202 @@
+{
+  "name": "Brief Scout Agent (FL-07)",
+  "nodes": [
+    {
+      "id": "wh-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "brief-agent",
+      "parameters": {
+        "path": "brief-agent",
+        "httpMethod": "POST",
+        "responseMode": "lastNode"
+      }
+    },
+    {
+      "id": "set-1",
+      "name": "Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "url",
+              "value": "={{ $json.body.url }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "topic",
+              "value": "={{ $json.body.topic }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "max_items",
+              "value": "={{ $json.body.max_items }}",
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "rss-1",
+      "name": "Gather \u00b7 RSS Feed",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "url": "={{ $json.url }}"
+      }
+    },
+    {
+      "id": "lim-1",
+      "name": "Limit",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ],
+      "parameters": {
+        "maxItems": "={{ $('Input').first().json.max_items }}"
+      }
+    },
+    {
+      "id": "ollama-1",
+      "name": "Synthesize \u00b7 Ollama (gemma3:1b)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        660,
+        120
+      ],
+      "parameters": {
+        "model": "gemma3:1b",
+        "baseUrl": "http://127.0.0.1:11434"
+      },
+      "credentials": {
+        "ollamaApi": {
+          "id": "1nNdK2Q5uooDKj93",
+          "name": "Ollama Local"
+        }
+      }
+    },
+    {
+      "id": "llm-1",
+      "name": "Synthesize \u00b7 LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "Topic: {{ $json.topic }}\nFeed URL: {{ $json.url || 'default' }}\n\nItems (title, link, snippet):\n{{ $json.items }}\n\nProduce the brief exactly as specified in the system prompt.",
+        "options": {
+          "systemMessage": "You are Brief Scout, a precise industry-briefing agent.\n\nYour job: given a topic and a list of RSS items (title, link, date, snippet),\nproduce a brief with exactly this structure:\n\n# Weekly Brief \u2014 <topic> \u2014 <YYYY-MM-DD>\n**Items scanned:** N\n**Sources:** <feed URL>\n\n## Briefs\n1. <one-sentence summary with source title in brackets>\n2. ...\n3. ...\n\nRules \u2014 never break these:\n1. One sentence per item. No bullet lists inside a sentence.\n2. Every claim cites the source title in square brackets at the end of the\n   sentence, e.g. \"Retailers are shifting ad spend to TikTok [Adweek: 'TikTok\n   Takes Over'].\"\n3. No invented links, no invented numbers. If the snippet lacks a figure,\n   do not add one. Write \"the article notes a shift\" not \"a 23 % shift.\"\n4. If zero items are relevant, say \"No relevant items found in this feed.\"\n5. Output ONLY the brief \u2014 no preamble, no \"Here is your brief,\" no\n   markdown code fences. Plain text."
+        }
+      }
+    },
+    {
+      "id": "fmt-1",
+      "name": "Format \u00b7 Brief",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const items = $('Limit').all();\nconst briefs = $('Synthesize \u00b7 LLM Chain').all();\nconst topic = $('Input').first().json.topic ?? '';\nconst out = [];\nconst n = Math.min(items.length, briefs.length);\nfor (let i = 0; i < n; i++) {\n  out.push({\n    title: items[i].json.title ?? 'untitled',\n    link: items[i].json.link ?? '',\n    ai: briefs[i].json.text ?? ''\n  });\n}\nreturn [{ json: { topic, generated_at: new Date().toISOString(), count: out.length, briefs: out } }];"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Input": {
+      "main": [
+        [
+          {
+            "node": "Gather \u00b7 RSS Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gather \u00b7 RSS Feed": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Synthesize \u00b7 LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesize \u00b7 LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Format \u00b7 Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesize \u00b7 Ollama (gemma3:1b)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Synthesize \u00b7 LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
