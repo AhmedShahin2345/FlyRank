@@ -36,3 +36,20 @@ def init_db():
                 SEED_TASKS,
             )
     conn.close()
+
+
+def migrate():
+    conn = connect()
+    columns = [
+        row["name"]
+        for row in conn.execute("PRAGMA table_info(tasks)").fetchall()
+    ]
+    if "created_at" not in columns:
+        conn.execute("ALTER TABLE tasks ADD COLUMN created_at TEXT")
+        conn.execute("ALTER TABLE tasks ADD COLUMN updated_at TEXT")
+        conn.execute(
+            "UPDATE tasks SET created_at = datetime('now'), updated_at = datetime('now')"
+        )
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_tasks_title ON tasks(title)")
+    conn.commit()
+    conn.close()

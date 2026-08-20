@@ -79,6 +79,22 @@ The database open in DB Browser for SQLite, showing the seeded tasks:
 - Index on `title` to speed up the search extra
 - Seeding wrapped in a transaction (all-or-nothing)
 
+### The timestamps migration
+
+Adding `created_at` and `updated_at` to a table that already had rows felt
+unnerving — `ALTER TABLE` changed the shape of live data, and SQLite even
+refuses a non-constant default, so I had to add the columns and then backfill
+existing rows in a second statement. That nervousness is exactly why migrations
+exist: changing a table's shape is a real, versioned operation, not an
+afterthought.
+
+### The index
+
+`idx_tasks_title` is an index on `tasks(title)`. Without it, every
+`WHERE title LIKE ...` search scans the whole table row by row; with it, SQLite
+can narrow the lookup quickly. An index is a sorted lookup structure the
+database maintains for you so queries find rows faster.
+
 ## Stage 6 — AI vs me
 
 I asked an AI assistant to do the same memory-to-SQLite migration, kept its
