@@ -14,3 +14,10 @@ A simple HTTP server with two JSON endpoints.
 
 - `GET /hello` - Returns a hello message
 - `GET /time` - Returns the current UTC time
+
+## Week 3 · Assignment A2 — Connecting CRUD to the database
+
+The full CRUD task API backed by SQLite lives in [`be-03-sqlite/`](be-03-sqlite/).
+Same five endpoints as Assignment 1, but data is stored in `tasks.db` and
+survives restarts. See [its README](be-03-sqlite/README.md) for setup, the
+why-SQLite explanation, example SQL, and the DB Browser screenshot.
