@@ -1,0 +1,9 @@
+{
+  "duration_seconds": 0.76,
+  "pages_fetched": 3,
+  "cache_hits": 60,
+  "valid_records": 60,
+  "invalid_records": 0,
+  "failed_pages": 1,
+  "unique_urls": 60
+}
