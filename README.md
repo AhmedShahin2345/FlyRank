@@ -4,16 +4,16 @@
 > **Author**: [Ahmed Shahin](https://ahmedshahin2345.github.io/)  
 > **Live Portfolio**: [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/)  
 > **Main Repository**: [github.com/AhmedShahin2345/FlyRank](https://github.com/AhmedShahin2345/FlyRank)  
-> **Capstone Repository**: [github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)  
+> **Backend Capstone Repository**: [github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)  
 > **Resume**: [`CV_Ahmed_Shahin.pdf`](CV_Ahmed_Shahin.pdf)
 
 ---
 
 > [!IMPORTANT]
-> # 🌟 Final Capstone Project — Standalone Repository
-> **The FlyRank Capstone Widget Platform is officially hosted in its own dedicated standalone repository:**  
+> # 🌟 Backend Engineering Capstone — Standalone Repository
+> **The FlyRank Widget Platform (Backend Capstone Project) is officially hosted in its own dedicated standalone repository:**  
 > 🔗 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
-> *(Click the link above to explore the complete standalone repository, CI/CD pipeline, and commit history. The complete codebase is also mirrored locally under [`ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/`](ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/))*
+> *(Click the link above to explore the complete standalone repository, CI/CD pipeline, and commit history. The complete codebase is also mirrored locally under [`backend-ai-engineering/be-10-capstone-widget-platform/`](backend-ai-engineering/be-10-capstone-widget-platform/))*
 
 ---
 
@@ -25,18 +25,7 @@ The codebase is organized into **two primary engineering tracks**:
 
 ```
 FlyRank/
-├── ai-fluency/                # 🧠 Track 1: AI systems, prompt ladders, n8n agents, MCP & capstone
-│   ├── identity/             # Design kit, monogram SVG, and typography tokens
-│   ├── fl-04/                # n8n industry brief workflow + 5 verified run outputs
-│   ├── mcp-setup/            # Model Context Protocol filesystem server configs
-│   ├── fl-09-docs-demo/      # System documentation + YouTube video demo
-│   ├── fl-10-capstone/       # Capstone package, retrospective, hours log & build-in-public post
-│   │   └── flyrank-capstone-widget-platform/ # 🌟 Complete mirrored capstone codebase
-│   ├── evidence/             # Screenshots, canvas captures, and 2-min unedited demo video
-│   ├── fl-07-agent-workflow.json # Autonomous Brief Scout agent with cron scheduler & Slack dispatch
-│   └── README.md             # AI Fluency track index & curriculum
-│
-├── backend-ai-engineering/   # ⚙️ Track 2: Production microservices, auth, queues, scrapers, PDF & decision flow
+├── backend-ai-engineering/   # ⚙️ Track 1: Production microservices, auth, queues, scrapers, PDF, decision flow & Capstone
 │   ├── be-01-simple-server/  # Native Python HTTP microservice
 │   ├── be-03-auth/           # FastAPI + Supabase Auth with JWT bearer dependency (11 tests pass)
 │   ├── be-03-sqlite/         # SQLite3 task CRUD API with schema migrations & parameterized SQL
@@ -46,7 +35,18 @@ FlyRank/
 │   ├── be-07-llm/            # FastAPI LLM enrichment pipeline backed by Ollama gemma3:1b (6 tests pass)
 │   ├── be-08-pdf-report/     # Async PostgreSQL + ReportLab PDF generation worker & download endpoint
 │   ├── be-09-decision-flow/  # Next.js + React Flow + Inngest interactive visual AI decision editor
+│   ├── be-10-capstone-widget-platform/ # 🌟 Complete Backend Capstone Platform codebase
 │   └── README.md             # Backend AI Engineering track index & test instructions
+│
+├── ai-fluency/                # 🧠 Track 2: AI systems, prompt ladders, n8n agents, MCP & capstone docs
+│   ├── identity/             # Design kit, monogram SVG, and typography tokens
+│   ├── fl-04/                # n8n industry brief workflow + 5 verified run outputs
+│   ├── mcp-setup/            # Model Context Protocol filesystem server configs
+│   ├── fl-09-docs-demo/      # System documentation + YouTube video demo
+│   ├── fl-10-capstone/       # Capstone package, retrospective, hours log & build-in-public post
+│   ├── evidence/             # Screenshots, canvas captures, and 2-min unedited demo video
+│   ├── fl-07-agent-workflow.json # Autonomous Brief Scout agent with cron scheduler & Slack dispatch
+│   └── README.md             # AI Fluency track index & curriculum
 │
 ├── CV_Ahmed_Shahin.pdf       # Updated CV with live portfolio link
 ├── DELIVERABLES.md           # Comprehensive 8-week portal submission card mapping
@@ -55,28 +55,9 @@ FlyRank/
 
 ---
 
-## 🧠 Track 1: AI Fluency
+## ⚙️ Track 1: Backend AI Engineering
 
-The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits and prompt ladders to autonomous agent architectures, local LLM pipelines, and capstone delivery:
-
-- **Capstone Widget Platform (FL-10)**:
-  - Multi-tenant, isolated lead-capture platform with FastAPI, PostgreSQL, Redis/RQ worker, immutable versioned JavaScript embed bundle, and Playwright end-to-end browser tests.
-  - Dedicated repository: **[flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**
-- **Autonomous Brief Scout Agent (FL-07 & W6)**:
-  - Webhook endpoint (`POST /webhook/brief-agent`) and recurring cron trigger (`0 9 * * 2` Every Tuesday 09:00).
-  - Fetches external RSS feeds, synthesizes executive summaries via local **Ollama (`gemma3:1b`)**, writes persistent Markdown briefs to disk, and dispatches outbound alerts.
-- **Model Context Protocol (FL-05 MCP)**:
-  - Local filesystem MCP server configuration and verified tool executions.
-- **Brand Identity & Live Portfolio (W3–W5, W7)**:
-  - Design kit, custom monogram SVG, DNS/hosting architecture walkthrough, and production deployment at [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/).
-
-👉 *Explore full AI Fluency deliverables in [`ai-fluency/README.md`](ai-fluency/README.md).*
-
----
-
-## ⚙️ Track 2: Backend AI Engineering
-
-The **[Backend AI Engineering Track](backend-ai-engineering/)** encompasses production backend patterns from HTTP fundamentals to asynchronous queues, PDF compilers, and interactive decision flow engines:
+The **[Backend AI Engineering Track](backend-ai-engineering/)** encompasses production backend patterns from HTTP fundamentals to asynchronous queues, PDF compilers, interactive decision flow engines, and the **Backend Capstone Widget Platform**:
 
 | Module | Description | Technologies | Test Status |
 |---|---|---|---|
@@ -89,8 +70,27 @@ The **[Backend AI Engineering Track](backend-ai-engineering/)** encompasses prod
 | **[BE-07](backend-ai-engineering/be-07-llm/)** | LLM API Pipeline | FastAPI, Ollama (`gemma3:1b`), Pydantic | **6/6 Passed** |
 | **[BE-08](backend-ai-engineering/be-08-pdf-report/)** | PDF Report Generator | FastAPI, PostgreSQL, ReportLab | Async Document Worker |
 | **[BE-09](backend-ai-engineering/be-09-decision-flow/)** | AI Decision Flow Editor | Next.js, React Flow, Inngest | Interactive Graph Editor |
+| **[BE-10 Capstone](backend-ai-engineering/be-10-capstone-widget-platform/)** | Backend Capstone Platform | FastAPI, PostgreSQL, Redis/RQ, Playwright | 🌟 **[Standalone Repo](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)** · Lead Capture Platform |
 
 👉 *Explore backend modules and setup instructions in [`backend-ai-engineering/README.md`](backend-ai-engineering/README.md).*
+
+---
+
+## 🧠 Track 2: AI Fluency
+
+The **[AI Fluency Track](ai-fluency/)** progresses from fundamental AI audits and prompt ladders to autonomous agent architectures, local LLM pipelines, and capstone documentation:
+
+- **Autonomous Brief Scout Agent (FL-07 & W6)**:
+  - Webhook endpoint (`POST /webhook/brief-agent`) and recurring cron trigger (`0 9 * * 2` Every Tuesday 09:00).
+  - Fetches external RSS feeds, synthesizes executive summaries via local **Ollama (`gemma3:1b`)**, writes persistent Markdown briefs to disk, and dispatches outbound alerts.
+- **Model Context Protocol (FL-05 MCP)**:
+  - Local filesystem MCP server configuration and verified tool executions.
+- **Brand Identity & Live Portfolio (W3–W5, W7)**:
+  - Design kit, custom monogram SVG, DNS/hosting architecture walkthrough, and production deployment at [ahmedshahin2345.github.io](https://ahmedshahin2345.github.io/).
+- **AI Fluency Capstone Package (FL-10)**:
+  - Comprehensive systems retrospective, detailed hours log, and build-in-public announcement.
+
+👉 *Explore full AI Fluency deliverables in [`ai-fluency/README.md`](ai-fluency/README.md).*
 
 ---
 

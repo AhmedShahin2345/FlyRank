@@ -2,7 +2,7 @@
 
 ## Overview & Quick Links
 - **GitHub Repository**: https://github.com/AhmedShahin2345/FlyRank
-- **Capstone Project (Dedicated Repository)**: https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform
+- **Backend Capstone Repository**: https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform
 - **Live Portfolio**: https://ahmedshahin2345.github.io/
 - **Local Automation Engine (n8n)**: `http://localhost:5678`
   - FL-04 Webhook: `/webhook/brief`
@@ -12,10 +12,10 @@
 ---
 
 > [!IMPORTANT]
-> # 🌟 Final Capstone Project — Standalone Repository
-> **The FlyRank Capstone Widget Platform is officially hosted in its own dedicated repository:**  
+> # 🌟 Backend Engineering Capstone — Standalone Repository
+> **The FlyRank Widget Platform (Backend Capstone Project) is officially hosted in its own dedicated repository:**  
 > 🔗 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
-> *(The complete capstone codebase is also available locally under [`ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/`](ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/))*
+> *(The complete backend capstone codebase is also mirrored locally under [`backend-ai-engineering/be-10-capstone-widget-platform/`](backend-ai-engineering/be-10-capstone-widget-platform/))*
 
 ---
 
@@ -32,6 +32,7 @@
 | **BE-07: LLM Pipeline** | [`backend-ai-engineering/be-07-llm/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-07-llm/) | `POST /enrich` endpoint backed by Ollama `gemma3:1b` with retry policies, quarantine log, 6 pytest tests passing | ✅ Complete & Tested |
 | **BE-08: PDF Report Generator** | [`backend-ai-engineering/be-08-pdf-report/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-08-pdf-report/) | Async `POST /reports` → `202` + `job_id`, PostgreSQL + ReportLab PDF generation, worker pool, idempotency, DLQ, download endpoint | ✅ Complete |
 | **BE-09: AI Decision Flow** | [`backend-ai-engineering/be-09-decision-flow/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-09-decision-flow/) | Next.js + React Flow + Inngest visual workflow editor, OpenAI LLM decisions (YES/NO), save/load JSON, execution logs | ✅ Complete |
+| **BE-10: Capstone Widget Platform** | [`backend-ai-engineering/be-10-capstone-widget-platform/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/backend-ai-engineering/be-10-capstone-widget-platform/) | 🌟 **[Standalone Repo: flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)** · Tenant-isolated lead-capture platform | ✅ Complete & Tested |
 
 ---
 
@@ -60,7 +61,7 @@
 | **W7** | Break Your Own Site | [`ai-fluency/break-your-own-site.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/break-your-own-site.md) | 8 bugs audited, 7 fixed, SEO/meta added, PageSpeed 92 | ✅ Complete |
 | **W7** | Plant Your Flag | [`ai-fluency/plant-your-flag.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/plant-your-flag.md) | Subdomain + Plausible analytics + FlyRank badge | ✅ Complete |
 | **W8** | FL-09: Docs + Demo Video | [`ai-fluency/fl-09-docs-demo/README.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-09-docs-demo/README.md) | README + unlisted YouTube demo (3:47) | ✅ Complete |
-| **W8** | FL-10: Capstone Package & Codebase | [`ai-fluency/fl-10-capstone/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-10-capstone/) | [Standalone Repo: flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform) + [Local Codebase](ai-fluency/fl-10-capstone/flyrank-capstone-widget-platform/) + Index + Retrospective + Hours Log + Build-in-Public post | ✅ Complete |
+| **W8** | FL-10: Capstone Package | [`ai-fluency/fl-10-capstone/`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/fl-10-capstone/) | Index + Retrospective + Hours Log + Build-in-Public post | ✅ Complete |
 | **W8** | Plan to Keep Building | [`ai-fluency/future-plan.md`](file:///var/folders/lw/ctqcqvdn3d10t2nfxp1__gxm0000gn/T/opencode/FlyRank/ai-fluency/future-plan.md) | Next case: Brief Scout SaaS + calendar reminder | ✅ Complete |
 
 ---
@@ -75,6 +76,7 @@
 | **BE-07 LLM API** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-07-llm` | `backend-ai-engineering/be-07-llm/README.md` |
 | **BE-08 PDF Generator** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-08-pdf-report` | `backend-ai-engineering/be-08-pdf-report/README.md` |
 | **BE-09 Decision Flow** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/backend-ai-engineering/be-09-decision-flow` | `backend-ai-engineering/be-09-decision-flow/README.md` |
+| **BE-10 Backend Capstone** | `https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform` | `backend-ai-engineering/be-10-capstone-widget-platform/README.md` |
 | **W1 Audit & Sitemap** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/FL-01-AI-Workflow-Audit.md` | `ai-fluency/FL-01-Portfolio-Sitemap.md` |
 | **W2 Prompt Ladder** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/FL-02-Prompt-Ladder.md` | `ai-fluency/FL-02-Prompt-Iteration-Log.md` |
 | **W3 Identity Kit** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/identity` | `ai-fluency/week-3-identity-kit.md` |
@@ -95,6 +97,6 @@
 | **W7 Break Your Own Site** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/break-your-own-site.md` | `ai-fluency/break-your-own-site.md` |
 | **W7 Plant Your Flag** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/plant-your-flag.md` | `ai-fluency/plant-your-flag.md` |
 | **W8 FL-09 Docs & Demo** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/fl-09-docs-demo` | `ai-fluency/fl-09-docs-demo/DEMO_VIDEO.md` |
-| **W8 FL-10 Capstone Project** | `https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform` | `ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md` |
+| **W8 FL-10 Capstone Package** | `https://github.com/AhmedShahin2345/FlyRank/tree/main/ai-fluency/fl-10-capstone` | `ai-fluency/fl-10-capstone/FL-10_CAPSTONE.md` |
 | **W8 Plan to Keep Building** | `https://github.com/AhmedShahin2345/FlyRank/blob/main/ai-fluency/future-plan.md` | `ai-fluency/future-plan.md` |
 

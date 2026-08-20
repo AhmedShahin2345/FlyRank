@@ -4,14 +4,6 @@ Welcome to the **AI Fluency** track of the FlyRank software engineering internsh
 
 ---
 
-> [!IMPORTANT]
-> # 🌟 Final Capstone Project — Standalone Repository
-> **The FlyRank Capstone Widget Platform is officially hosted and maintained as its own dedicated GitHub repository:**  
-> 👉 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
-> *(The complete capstone codebase is also mirrored locally inside [`fl-10-capstone/flyrank-capstone-widget-platform/`](fl-10-capstone/flyrank-capstone-widget-platform/))*
-
----
-
 ## 🗺️ 8-Week Curriculum & Deliverables Index
 
 | Week | Focus Area | Deliverables & Documentation | Key Artifacts |
@@ -23,7 +15,7 @@ Welcome to the **AI Fluency** track of the FlyRank software engineering internsh
 | **Week 5** | **Agent Architecture & Deployment** | [`week-5-pf-04-dns-walkthrough.md`](week-5-pf-04-dns-walkthrough.md)<br>[`week-5-explain-it-like-you-built-it.md`](week-5-explain-it-like-you-built-it.md)<br>[`fl-06-agent-spec.md`](fl-06-agent-spec.md)<br>[`fl-07-build-log.md`](fl-07-build-log.md) | [`fl-07-agent-workflow.json`](fl-07-agent-workflow.json)<br>[`evidence/fl-07-agent-run.mov`](evidence/fl-07-agent-run.mov) |
 | **Week 6** | **Proactive Automation & Feedback** | [`w6-make-it-do-something-explainer.md`](w6-make-it-do-something-explainer.md)<br>[`w6-mobile-fix-log.md`](w6-mobile-fix-log.md)<br>[`w6-phone-check-notes.md`](w6-phone-check-notes.md)<br>[`w6-survive-the-crit.md`](w6-survive-the-crit.md) | Scheduled cron trigger (`0 9 * * 2`) & outbound Slack dispatch |
 | **Week 7** | **Quality & Domain Flag Planting** | [`break-your-own-site.md`](break-your-own-site.md)<br>[`plant-your-flag.md`](plant-your-flag.md) | 8 bugs audited, Plausible analytics, FlyRank badge |
-| **Week 8** | **Capstone & Future Roadmap** | [`fl-09-docs-demo/`](fl-09-docs-demo/) (Docs & Demo)<br>[`fl-10-capstone/`](fl-10-capstone/) (Capstone Package & Codebase)<br>[`future-plan.md`](future-plan.md) (Roadmap) | **[flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)** |
+| **Week 8** | **Capstone & Future Roadmap** | [`fl-09-docs-demo/`](fl-09-docs-demo/) (Docs & Demo)<br>[`fl-10-capstone/`](fl-10-capstone/) (Capstone Package)<br>[`future-plan.md`](future-plan.md) (Roadmap) | Retrospective, hours log, video script & build-in-public post |
 
 ---
 

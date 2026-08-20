@@ -1,6 +1,14 @@
 # ⚙️ Backend AI Engineering Track · FlyRank Internship
 
-Welcome to the **Backend AI Engineering** track of the FlyRank software engineering internship. This repository houses a production-grade suite of backend microservices, data extraction pipelines, authentication layers, background worker queues, PDF generation engines, containerized databases, and AI decision workflow graphs.
+Welcome to the **Backend AI Engineering** track of the FlyRank software engineering internship. This repository houses a production-grade suite of backend microservices, data extraction pipelines, authentication layers, background worker queues, PDF generation engines, containerized databases, and the **Backend Capstone Widget Platform**.
+
+---
+
+> [!IMPORTANT]
+> # 🌟 Backend Engineering Capstone — Standalone Repository
+> **The FlyRank Widget Platform (Backend Capstone Project) is officially hosted in its own dedicated standalone repository:**  
+> 👉 **[https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)**  
+> *(Click the link above to view the standalone repository, commit history, releases, and issue tracker. The complete codebase is also mirrored locally under [`be-10-capstone-widget-platform/`](be-10-capstone-widget-platform/))*
 
 ---
 
@@ -31,7 +39,10 @@ Welcome to the **Backend AI Engineering** track of the FlyRank software engineer
        │ (Async POST /reports → 202, ReportLab PDF generator, worker pool, download endpoint)
        ▼
 [BE-09: Visual Decision Workflows]
-       └─▶ (Next.js + React Flow + Inngest visual workflow editor & OpenAI decision graph)
+       │ (Next.js + React Flow + Inngest visual workflow editor & OpenAI decision graph)
+       ▼
+[BE-10: Backend Capstone Platform]
+       └─▶ (Multi-tenant lead-capture platform, FastAPI, Postgres, Redis/RQ, Playwright tests)
 ```
 
 ---
@@ -49,6 +60,7 @@ Welcome to the **Backend AI Engineering** track of the FlyRank software engineer
 | **BE-07 LLM** | [`be-07-llm/`](be-07-llm/) | FastAPI, Ollama (`gemma3:1b`), Pydantic | `POST /enrich`, exponential backoff retries, schema repairs, quarantine log, **6/6 tests pass**. |
 | **BE-08 PDF** | [`be-08-pdf-report/`](be-08-pdf-report/) | FastAPI, PostgreSQL, ReportLab | Async report jobs, PDF compilation worker, secure artifact download endpoint. |
 | **BE-09 Flow** | [`be-09-decision-flow/`](be-09-decision-flow/) | Next.js, React Flow, Inngest | Interactive node graph visual editor, LLM decision evaluator, execution history. |
+| **BE-10 Capstone** | [`be-10-capstone-widget-platform/`](be-10-capstone-widget-platform/) | FastAPI, PostgreSQL, Redis/RQ, Playwright | 🌟 **[Standalone Repo](https://github.com/AhmedShahin2345/flyrank-capstone-widget-platform)** · Tenant-isolated widget lead capture platform. |
 
 ---
 
@@ -73,7 +85,7 @@ cd ../be-07-llm && .venv/bin/python tests/test_pipeline.py
    In `be-03-auth`, we utilized an active proxy wrapper (`_SupabaseProxy`) for the Supabase client to prevent uninitialized module-level import errors.
 
 2. **Asynchronous Decoupling**:
-   In `be-06-background-job` and `be-08-pdf-report`, heavy compute and I/O tasks immediately return `202 Accepted` with a UUID `job_id`, delegating processing to resilient worker pools with Dead Letter Queues (DLQ).
+   In `be-06-background-job`, `be-08-pdf-report`, and `be-10-capstone-widget-platform`, heavy compute and I/O tasks immediately return `202 Accepted` with a UUID `job_id`, delegating processing to resilient worker pools with Dead Letter Queues (DLQ).
 
 3. **Strict Schema Validation & Quarantine**:
    In `be-07-llm`, raw model completions are strictly parsed into Pydantic models. Malformed JSON triggers an automated one-shot repair prompt; unrecoverable responses are quarantined to `logs/quarantine.jsonl`.
