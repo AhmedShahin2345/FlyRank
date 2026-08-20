@@ -1,13 +1,12 @@
-import json
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException
 
-from ..llm.client import call_model, load_prompt
+from ..llm.pipeline import run_pipeline
 from ..llm.schema import EnrichInput, EnrichOutput
-from ..llm.stub import stub_answer
+from ..llm.stub import fallback_answer, stub_answer
 
 load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
 
@@ -20,8 +19,9 @@ PROMPT_VERSION = "v1"
 def enrich(item: EnrichInput):
     if os.environ.get("LLM_STUB") == "1":
         return stub_answer(item)
-    prompt = load_prompt(PROMPT_VERSION)
-    item_json = json.dumps(item.model_dump(), ensure_ascii=False)
-    model = os.environ["LLM_MODEL"]
-    raw = call_model(prompt, item_json, model)
-    return json.loads(raw)
+    if os.environ.get("LLM_ENABLED", "true").lower() in ("false", "0", "no"):
+        return fallback_answer()
+    try:
+        return run_pipeline(item, PROMPT_VERSION)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
