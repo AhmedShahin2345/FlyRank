@@ -23,10 +23,18 @@ def extract_json(text: str) -> str:
     text = text.strip()
     fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
     if fenced:
-        return fenced.group(1)
+        text = fenced.group(1)
     obj = re.search(r"\{.*\}", text, re.S)
     if obj:
-        return obj.group(0)
+        text = obj.group(0)
+    # Small models sometimes emit raw control characters inside JSON strings
+    # (a real newline instead of the \n escape). Convert them to \uXXXX escapes
+    # so strict parsers accept the answer instead of quarantining it.
+    text = re.sub(
+        r"[\x00-\x1f\x7f]",
+        lambda m: "\\u%04x" % ord(m.group()),
+        text,
+    )
     return text
 
 
@@ -102,8 +110,17 @@ def complete(messages: list[dict], prompt_version: str, model: str) -> tuple[str
 def run_pipeline(item: EnrichInput, prompt_version: str = "v1", model: str | None = None) -> EnrichOutput:
     import os
 
-    prompt = load_prompt(prompt_version)
+    from .cache import cache_key, get, put
+
     item_json = json.dumps(item.model_dump(), ensure_ascii=False)
+    cache_enabled = os.environ.get("LLM_CACHE", "1") == "1"
+    key = cache_key(item_json, prompt_version)
+    if cache_enabled:
+        cached = get(key)
+        if cached is not None:
+            return EnrichOutput.model_validate(cached)
+
+    prompt = load_prompt(prompt_version)
     model = model or os.environ["LLM_MODEL"]
 
     start = time.perf_counter()
@@ -145,4 +162,6 @@ def run_pipeline(item: EnrichInput, prompt_version: str = "v1", model: str | Non
             raise RuntimeError(f"model output rejected after repair: {second_err}")
     duration_ms = int((time.perf_counter() - start) * 1000)
     log_call(prompt_version, model, duration_ms, repairs, usage)
+    if cache_enabled:
+        put(key, out.model_dump())
     return out

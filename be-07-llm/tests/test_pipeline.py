@@ -1,3 +1,4 @@
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -30,6 +31,7 @@ class TestRetryPolicy(unittest.TestCase):
         pipeline.MAX_RETRIES = 3
         pipeline.BACKOFF_BASE = 0.0  # no real sleeping in tests
         pipeline.random.uniform = lambda a, b: 0.0
+        os.environ["LLM_CACHE"] = "0"  # never let the cache short-circuit a mocked call
 
     def test_401_authentication_error_is_not_retried(self):
         calls = []

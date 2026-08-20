@@ -1,0 +1,42 @@
+[
+  {
+    "input": { "title": "A Light in the Attic", "description": "Poetry from Shel Silverstein celebrating its 20th anniversary.", "price_gbp": 51.77 },
+    "expected": { "category": "fiction", "summary": "Classic illustrated poetry from Shel Silverstein.", "confidence": 0.9, "quality_flags": [] },
+    "note": "typical: poetry, clearly fiction"
+  },
+  {
+    "input": { "title": "Sapiens", "description": "A brief history of humankind from Stone Age to the present.", "price_gbp": 24.99 },
+    "expected": { "category": "nonfiction", "summary": "History of humankind from Stone Age to today.", "confidence": 0.9, "quality_flags": [] },
+    "note": "typical: non-fiction history"
+  },
+  {
+    "input": { "title": "The Power of Habit", "description": "Why we do what we do in life and business.", "price_gbp": 18.50 },
+    "expected": { "category": "self_help", "summary": "Explains how habits form and how to change them.", "confidence": 0.85, "quality_flags": [] },
+    "note": "typical: self-help"
+  },
+  {
+    "input": { "title": "Where the Wild Things Are", "description": "Max sails to the land of the wild things in a classic picture book.", "price_gbp": 9.99 },
+    "expected": { "category": "children", "summary": "A classic picture book about a boy among the wild things.", "confidence": 0.9, "quality_flags": [] },
+    "note": "typical: children's picture book"
+  },
+  {
+    "input": { "title": "Maintenance Manual 42", "description": "Service manual for forklift model X7, part list and torque specs.", "price_gbp": 19.99 },
+    "expected": { "category": "other", "summary": "A technical manual that does not fit any catalogue category.", "confidence": 0.7, "quality_flags": [] },
+    "note": "ambiguous: no category fits, model must use other"
+  },
+  {
+    "input": { "title": "AMAZING SECRETS!!!", "description": "", "price_gbp": 0.0 },
+    "expected": { "category": "other", "summary": "No description was provided for this record.", "confidence": 0.3, "quality_flags": ["no_description", "price_is_zero", "summary_is_a_guess"] },
+    "note": "when-unsure: empty description + hype title + zero price, must not guess"
+  },
+  {
+    "input": { "title": "Python for Beginners", "description": "A practical introduction to the Python programming language.", "price_gbp": 29.95 },
+    "expected": { "category": "nonfiction", "summary": "A practical introduction to Python programming.", "confidence": 0.85, "quality_flags": [] },
+    "note": "typical: textbook/reference non-fiction"
+  },
+  {
+    "input": { "title": "The Very Hungry Caterpillar", "description": "A caterpillar eats its way through the week in a beloved board book.", "price_gbp": 12.99 },
+    "expected": { "category": "children", "summary": "A beloved board book about a very hungry caterpillar.", "confidence": 0.9, "quality_flags": [] },
+    "note": "typical: children's board book"
+  }
+]
